@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <h1>PolyFarm</h1>
+        <div class="oui">
+            <div class="tools">
+                <label class="titre_plante_tools">Configuration ⚙️</label>
+                <label>Taille grille: </label>
+                <select id="grid_size" name="Grille">
+                    <option value="4x4">4x4</option>
+                    <option value="5x5">5x5</option>
+                    <option value="6x6">6x6</option>                    
+                </select>
+                <label class="titre_plante_tools">
+                    Informations ℹ️
+                </label>
+                <label>Température: </label><label>15°</label>
+                <label>Humidité: </label><label>68%</label>
+                <label>Luminosité: </label><label>45 cd/m²</label>
+            </div>
+            <field>
+                <field-parts></field-parts>
+            </field>
+            <div class="tools">
+                <label class="titre_plante_tools">Plante 🪴</label>
+                <label>
+                    Plante:
+                </label>
+                <select id="plante" name="Plantes">
+                    <option value="none"></option>
+                    <option value="patate">Patate</option>
+                    <option value="carotte">Carotte</option>
+                    <option value="radis">Radis</option>
+                </select>
+                <label>
+                    Arrosage par jour:
+                </label>
+                <input>
+                <label>
+                    mL/arrosage
+                </label>
+                <input>
+                <label>
+                    Dernier arrosage:
+                </label>
+                <label>24/09/2025 à 22h35</label>
+                <label>Status du robot:</label><label>Arrêté/Déplacement/Arrosage</label>
+                <button class="arroser">Arroser</button>
+            </div>
+        </div>
+        <img class="reload_image" src="rsc/reload.png">
+      
+        <script src="js/script.js" defer="true"></script>
+        
+            <footer>
+                <img class="logo_pd" src="rsc/polytech_dijon.png" width="10%">
+                <label class="createurs">
+                    Créé par Hugo R, Gabin B, Thomas G, Lauric G
+                </label>
+                <label class="promotion">
+                    Promotion Frances Allen, 5A SE 2025 
+                </label>
+            </footer>
+    </body>
+
+</html>
