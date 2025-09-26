@@ -10,7 +10,7 @@ function onLoad()
 
 function attachLegumeDropdownEvent()
 {
-    const element = document.getElementById("select");
+    const element = document.getElementById("plante");
     element.addEventListener("change", (event) => 
     {
         console.log(element.value);
