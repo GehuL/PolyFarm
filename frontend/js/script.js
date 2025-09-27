@@ -4,6 +4,10 @@ const rsc = '../rsc'
 
 let selectedTile = null;
 
+const defaultPlantes = {"carotte": new Plante("carotte", 2, 150),
+                        "patate": new Plante("patate", 1, 300),
+                        "radis": new Plante("radis", 3, 100)};
+
 function onLoad()
 {
     generateField();
@@ -62,18 +66,21 @@ function attachLegumeDropdownEvent()
     const element = document.getElementById("plante");
     element.addEventListener("change", (event) => 
     {
-
+        const plante = defaultPlantes[element.value];
+        if(!plante) return;
+        updatePlanteUI(plante, false);
     })
 }
 
-function updatePlanteUI(plante)
+function updatePlanteUI(plante, updateTile = true)
 {
     document.getElementById("plante").value = plante.nom ?? "";
     document.getElementById("frequence_arrosage").value = plante.frequenceArrosage ?? 0;
     document.getElementById("quantite_eau").value = plante.quantiteEau ?? 0;
     document.getElementById("valeur_slider").textContent = plante.frequenceArrosage ?? 0;
     document.getElementById("valeur_eau").textContent = plante.quantiteEau ?? 0;
-    selectedTile.style.backgroundImage = plante.nom ? `url(${rsc}/${plante.nom}.png)` : "";
+    if(updateTile)
+        selectedTile.style.backgroundImage = plante.nom ? `url(${rsc}/${plante.nom}.png)` : "";
 }
 
 function generateField()
