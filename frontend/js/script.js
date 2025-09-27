@@ -38,13 +38,13 @@ function attachPlanteActionEvent()
         if(!selectedTile) return;
        
         const planteName = document.getElementById("plante").value;
-        selectedTile.dataset.plante = JSON.stringify(new Plante(
+        const plante = new Plante(
             planteName,
             document.getElementById("frequence_arrosage").value,
-            document.getElementById("quantite_eau").value
-        ).toData());
+            document.getElementById("quantite_eau").value);
 
-        selectedTile.style.backgroundImage = `url(${rsc}/${planteName}.png)`;       
+        selectedTile.dataset.plante = JSON.stringify(plante.toData());
+        updatePlanteUI(plante);    
         console.log(selectedTile.dataset.plante);
     });
 
@@ -52,10 +52,8 @@ function attachPlanteActionEvent()
     {
         if(!selectedTile) return;
         console.log("Deleting plante", selectedTile.dataset.plante);
-        selectedTile.style.backgroundImage = "";
-        selectedTile.dataset.plante = "none";
-        const planteSelector = document.getElementById("plante")
-        planteSelector.value = "none";
+        delete selectedTile.dataset.plante;
+        updatePlanteUI(new Plante("", 0, 0));
     });
 }
 
@@ -66,6 +64,16 @@ function attachLegumeDropdownEvent()
     {
 
     })
+}
+
+function updatePlanteUI(plante)
+{
+    document.getElementById("plante").value = plante.nom ?? "";
+    document.getElementById("frequence_arrosage").value = plante.frequenceArrosage ?? 0;
+    document.getElementById("quantite_eau").value = plante.quantiteEau ?? 0;
+    document.getElementById("valeur_slider").textContent = plante.frequenceArrosage ?? 0;
+    document.getElementById("valeur_eau").textContent = plante.quantiteEau ?? 0;
+    selectedTile.style.backgroundImage = plante.nom ? `url(${rsc}/${plante.nom}.png)` : "";
 }
 
 function generateField()
@@ -85,7 +93,20 @@ function generateField()
             
             // Update infos based on tile
             const planteSelector = document.getElementById("plante")
-            planteSelector.value = selectedTile.dataset.plante;
+            
+            if(!selectedTile.dataset.plante)
+            {
+                updatePlanteUI(new Plante("", 0, 0));
+                return;
+            }
+
+            const plante = JSON.parse(selectedTile.dataset.plante, (key, value) => {
+                return value;
+            });
+
+            updatePlanteUI(plante);
+
+            planteSelector.value = plante.nom;
         });
         element.appendChild(tile);
     }
