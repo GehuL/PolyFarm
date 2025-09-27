@@ -35,7 +35,6 @@
                     Plante:
                 </label>
                 <select id="plante" name="Plantes">
-                    <option value="none"></option>
                     <option value="patate">Patate</option>
                     <option value="carotte">Carotte</option>
                     <option value="radis">Radis</option>
@@ -43,23 +42,31 @@
                 <label>
                     Arrosage par jour:
                 </label>
-                <input>
+                <div class="slider-container">
+                    <input id="frequence_arrosage" type="range" min="1" max="10"><span id="valeur_slider">5</span>
+                </div>
                 <label>
-                    mL/arrosage
+                    mL/arrosage:
                 </label>
-                <input>
-                <label>
+                <div class="slider-container">
+                    <input id="quantite_eau" type="range" min="0" max="500"><span id="valeur_eau">250</span>
+                </div>
+                <label >
                     Dernier arrosage:
                 </label>
-                <label>24/09/2025 à 22h35</label>
+                <label id="last_arrosage">24/09/2025 à 22h35</label>
                 <label>Status du robot:</label><label>Arrêté/Déplacement/Arrosage</label>
-                <button class="arroser">Arroser</button>
+                <div class="plante-actions">
+                    <button id="sauvegarder_plante">Valider ✅</button>
+                    <button id="supprimer_plante">Supprimer 🗑️</button>
+                </div>
+                <!--<button class="arroser">Arroser</button>-->
             </div>
         </div>
          <button class="reload_image">
              <img src="rsc/reload.png" alt="Button Image">
          </button>
-        <script src="js/script.js" defer="true"></script>
+        <script src="js/script.js" defer="true" type="module"></script>
         
             <footer>
                 <img class="logo_pd" src="rsc/polytech_dijon.png" width="10%">

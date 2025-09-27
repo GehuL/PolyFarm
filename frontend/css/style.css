@@ -24,6 +24,22 @@
     grid-column: 2;
     width: fit-content;
     margin-bottom: 25px;
+    justify-self: center;
+    grid-column: 1 / -1;
+}
+
+.slider-container {
+    display: flex;
+}
+
+input[type="range"] {
+    width: 100%;
+    align-self: center;
+}
+
+#valeur_slider, #valeur_eau {
+    width: fit-content;
+    align-self: flex-end;
 }
 
 .arroser {
@@ -68,6 +84,23 @@ field-part.active {
     box-shadow: 0 0 4px green;
 }
 
+button {
+    border-color: rgb(187, 168, 142);
+    border-color: rgb(187, 166, 137);
+    border-radius: 15px;
+}
+
+
+.plante-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 10px;
+    grid-column: 1 / 3;
+}
+
 .reload_image
 {
     width: 100px;
@@ -78,9 +111,6 @@ field-part.active {
     transform: translateX(-50%);
     background-size: cover;
     background-position: center;
-    background-color: antiquewhite;
-    border-color: antiquewhite;
-    border-radius: 15px;
 }
 
 .reload_image > img
