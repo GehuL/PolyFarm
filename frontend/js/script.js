@@ -10,10 +10,11 @@ const defaultPlantes = {"carotte": new Plante("carotte", 2, 150),
 
 function onLoad()
 {
-    generateField();
     attachLegumeDropdownEvent();
     attachPlanteActionEvent();
     attachSliderEvent();
+    attachGridSizeEvent();
+    generateField(25);
 }
 
 function attachSliderEvent()
@@ -30,6 +31,20 @@ function attachSliderEvent()
     
     quantiteSlider.addEventListener("input", (event) => {
         quantiteValue.textContent = quantiteSlider.value;
+    });
+}
+
+function attachGridSizeEvent()
+{
+    const gridSizeSlider = document.getElementById("grid_size");
+
+    gridSizeSlider.addEventListener("change", (event) => {
+        const fieldParts = document.querySelector("field-parts");
+       
+        fieldParts.style.gridTemplateColumns = `repeat(${ Math.sqrt(gridSizeSlider.value)}, 1fr)`;
+
+        generateField(gridSizeSlider.value);
+        console.log("Grid size changed to", gridSizeSlider.value);
     });
 }
 
@@ -85,16 +100,22 @@ function updatePlanteUI(plante, updateTile = true)
         selectedTile.style.backgroundImage = plante.nom ? `url(${rsc}/${plante.nom}.png)` : "";
 }
 
-function generateField()
+function generateField(size)
 {
-    const element = document.querySelector("field-parts");
-    for(let i = 0; i < 25; i++)
+    // clear existing
+    const existingTiles = document.querySelector("field-parts");
+    existingTiles.innerHTML = "";
+    
+    selectedTile = null;
+    updatePlanteUI(new Plante("", 0, 0), false);
+    
+    for(let i = 0; i < size; i++)
     {
         const tile = document.createElement("field-part");
         tile.addEventListener("click", (event) => 
         {
             if(event.target === selectedTile) return;
-
+            
             // Change bordure color and update reference
             event.target.classList.toggle("active", true);
             selectedTile?.classList.toggle("active", false);
@@ -108,16 +129,16 @@ function generateField()
                 updatePlanteUI(new Plante("", 0, 0));
                 return;
             }
-
+            
             const plante = JSON.parse(selectedTile.dataset.plante, (key, value) => {
                 return value;
             });
-
+            
             updatePlanteUI(plante);
-
+                
             planteSelector.value = plante.nom;
         });
-        element.appendChild(tile);
+        existingTiles.appendChild(tile);
     }
 }
 

@@ -14,32 +14,32 @@
         </div>
         <div class="oui">
             <div class="tools">
-                <label class="titre_plante_tools">Plante 🪴</label>
-                <label>
+                <span class="titre_plante_tools">Plante 🪴</span>
+                <span>
                     Plante:
-                </label>
+                </span>
                 <select id="plante" name="Plantes">
                     <option value="patate">Patate</option>
                     <option value="carotte">Carotte</option>
                     <option value="radis">Radis</option>
                 </select>
-                <label>
+                <span>
                     Arrosage par semaine:
-                </label>
+                </span>
                 <div class="slider-container">
                     <input id="frequence_arrosage" type="range" min="0" max="10"><span id="valeur_slider">5</span>
                 </div>
-                <label>
+                <span>
                     mL/arrosage:
-                </label>
+                </span>
                 <div class="slider-container">
                     <input id="quantite_eau" type="range" min="0" max="500"><span id="valeur_eau">250</span>
                 </div>
-                <label >
+                <span >
                     Dernier arrosage:
-                </label>
-                <label id="last_arrosage">24/09/2025 à 22h35</label>
-                <label>Status du robot:</label><label>Arrêté/Déplacement/Arrosage</label>
+                </span>
+                <span id="last_arrosage">24/09/2025 à 22h35</span>
+                <span>Status du robot:</span><span>Arrêté/Déplacement/Arrosage</span>
                 <div class="plante-actions">
                     <button id="sauvegarder_plante">Valider ✅</button>
                     <button id="supprimer_plante">Supprimer 🗑️</button>
@@ -50,19 +50,21 @@
                 <field-parts></field-parts>
             </field>
             <div class="tools">
-                <label class="titre_plante_tools">Configuration ⚙️</label>
-                <label>Taille grille: </label>
+                <span class="titre_plante_tools">Configuration ⚙️</span>
+                <span>Taille grille: </span>
                 <select id="grid_size" name="Grille">
-                    <option value="4x4">4x4</option>
-                    <option value="5x5">5x5</option>
-                    <option value="6x6">6x6</option>                    
+                    <option value="16">4x4</option>
+                    <option value="25" selected>5x5</option>
+                    <option value="36">6x6</option>
+                    <option value="49">7x7</option>
+                    <option value="64">8x8</option>                 
                 </select>
-                <label class="titre_plante_tools">
+                <span class="titre_plante_tools">
                     Informations ℹ️
-                </label>
-                <label>Température: </label><label>15°</label>
-                <label>Humidité: </label><label>68%</label>
-                <label>Luminosité: </label><label>45 cd/m²</label>
+                </span>
+                <span>Température: </span><span>15°</span>
+                <span>Humidité: </span><span>68%</span>
+                <span>Luminosité: </span><span>45 cd/m²</span>
             </div>
         </div>
          <button class="reload_image">
@@ -72,12 +74,12 @@
         
             <footer>
                 <img class="logo_pd" src="rsc/polytech_dijon.png">
-                <label class="createurs">
+                <span class="createurs">
                     Créé par Hugo R, Gabin B, Thomas G, Lauric G
-                </label>
-                <label class="promotion">
+                </span>
+                <span class="promotion">
                     Promotion Frances Allen, 5A SE 2025 
-                </label>
+                </span>
             </footer>
     </body>
 
