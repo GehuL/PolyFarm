@@ -27,6 +27,7 @@ function attachSliderEvent()
 
     const quantiteSlider = document.getElementById("quantite_eau");
     const quantiteValue = document.getElementById("valeur_eau");
+    
     quantiteSlider.addEventListener("input", (event) => {
         quantiteValue.textContent = quantiteSlider.value;
     });
@@ -47,8 +48,8 @@ function attachPlanteActionEvent()
             document.getElementById("frequence_arrosage").value,
             document.getElementById("quantite_eau").value);
 
-        selectedTile.dataset.plante = JSON.stringify(plante.toData());
         updatePlanteUI(plante);    
+        selectedTile.dataset.plante = JSON.stringify(plante.toData());
         console.log(selectedTile.dataset.plante);
     });
 
@@ -79,6 +80,7 @@ function updatePlanteUI(plante, updateTile = true)
     document.getElementById("quantite_eau").value = plante.quantiteEau ?? 0;
     document.getElementById("valeur_slider").textContent = plante.frequenceArrosage ?? 0;
     document.getElementById("valeur_eau").textContent = plante.quantiteEau ?? 0;
+  
     if(updateTile)
         selectedTile.style.backgroundImage = plante.nom ? `url(${rsc}/${plante.nom}.png)` : "";
 }

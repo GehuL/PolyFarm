@@ -4,31 +4,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>PolyFarm</title>
+        <link rel="icon" type="image/png" href="rsc/logo_polyfarm.png"/>
         <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
-        <h1>PolyFarm</h1>
+        <div class="title"><img id="logo" src="rsc/logo_polyfarm.png" alt="Logo" class="logo" width="5%""><h1>PolyFarm</h1>
+        </div>
         <div class="oui">
-            <div class="tools">
-                <label class="titre_plante_tools">Configuration ⚙️</label>
-                <label>Taille grille: </label>
-                <select id="grid_size" name="Grille">
-                    <option value="4x4">4x4</option>
-                    <option value="5x5">5x5</option>
-                    <option value="6x6">6x6</option>                    
-                </select>
-                <label class="titre_plante_tools">
-                    Informations ℹ️
-                </label>
-                <label>Température: </label><label>15°</label>
-                <label>Humidité: </label><label>68%</label>
-                <label>Luminosité: </label><label>45 cd/m²</label>
-            </div>
-            <field>
-                <field-parts></field-parts>
-            </field>
             <div class="tools">
                 <label class="titre_plante_tools">Plante 🪴</label>
                 <label>
@@ -62,6 +46,24 @@
                 </div>
                 <!--<button class="arroser">Arroser</button>-->
             </div>
+            <field>
+                <field-parts></field-parts>
+            </field>
+            <div class="tools">
+                <label class="titre_plante_tools">Configuration ⚙️</label>
+                <label>Taille grille: </label>
+                <select id="grid_size" name="Grille">
+                    <option value="4x4">4x4</option>
+                    <option value="5x5">5x5</option>
+                    <option value="6x6">6x6</option>                    
+                </select>
+                <label class="titre_plante_tools">
+                    Informations ℹ️
+                </label>
+                <label>Température: </label><label>15°</label>
+                <label>Humidité: </label><label>68%</label>
+                <label>Luminosité: </label><label>45 cd/m²</label>
+            </div>
         </div>
          <button class="reload_image">
              <img src="rsc/reload.png" alt="Button Image">
@@ -69,7 +71,7 @@
         <script src="js/script.js" defer="true" type="module"></script>
         
             <footer>
-                <img class="logo_pd" src="rsc/polytech_dijon.png" width="10%">
+                <img class="logo_pd" src="rsc/polytech_dijon.png">
                 <label class="createurs">
                     Créé par Hugo R, Gabin B, Thomas G, Lauric G
                 </label>

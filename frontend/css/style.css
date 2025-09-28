@@ -1,6 +1,18 @@
 .oui {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    row-gap: 0px;
+    width: 100%;
 }
 
 .tools {
@@ -59,12 +71,12 @@ field-parts {
     background-image: url('../rsc/bac_culture.png');
     background-repeat: no-repeat;
     background-size: contain;
+    width: 80%;
+    aspect-ratio: 1 / 1;
 }
 
 field-part {
     display: flex;
-    width: 80px;
-    height: 80px;
     border: 2px solid #7054178e;
 
     background: center no-repeat;
@@ -105,10 +117,7 @@ button {
 {
     width: 100px;
     height: 50px;
-    align-self: center;
-    margin-top: 50px;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    align-self: self-start;
     background-size: cover;
     background-position: center;
 }
@@ -120,48 +129,95 @@ button {
 
 h1 {
     text-align: center;
-    color: #50b4c5;
+    color: #1d4141;
     font-family: serif;
     font : bold;
-    font-size: 150px;
-    margin-top: 0%;
+    font-size: 120px;
     font-family: 'Segoe UI';
+    margin-bottom: 0px;
+    margin-top: 0%;
 }
 
 body {
     background-image: url('../rsc/background.jpg');
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 150%;
-    height: 100%;
-    justify-content: center;
-    margin-left: 0%;
-    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
 }
 
 footer {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     position: absolute;
     bottom: 10px;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-items: center;
 }
 
 .logo_pd {
-    margin-left: 50px;
+    width: 150px;
+    justify-self: start;
+    margin-left: 10px;
 }
 
 .promotion {
-    margin-right: 50px;
     font-family: 'Segoe UI';
     font-weight: bolder;
     color: #222020;
+    justify-self: end;
+    margin-right: 10px;;
 }
 
 .createurs {
     font-family: 'Segoe UI';
     font-weight: bold;
     color: #222020;
+}
 
+@media (orientation: portrait) {
+    .oui {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 20px;
+    }
+    .tools {
+        width: 80%;
+        height: fit-content;
+    }
+
+    field {
+        width: 100%;
+        justify-content: center;
+    }
+
+    body {
+        background-size: cover;
+        background-position: center center;
+    }
+
+    footer {
+        position: relative;
+        padding-top: 20px;
+    }
+
+    .reload_image{
+        margin-top: 20px;
+    }
+
+    #logo {
+        display: none;
+    }
+
+    h1 {
+        margin: 20px;
+    }
 }
