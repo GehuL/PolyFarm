@@ -25,7 +25,8 @@ export class Plante {
             nom: this.#nom,
             frequenceArrosage: this.#frequenceArrosage,
             quantiteEau: this.#quantiteEau,
-            lastArrosage: this.#lastArrosage
+            lastArrosage: this.#lastArrosage,
+            id: this.#id
         };
     }
 }
