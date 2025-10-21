@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
 }
@@ -119,6 +120,16 @@ button {
     align-self: self-start;
     background-size: cover;
     background-position: center;
+
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.reload_image.spinning > img {
+    animation: spin 1s linear infinite;
 }
 
 .reload_image > img
@@ -178,6 +189,12 @@ footer {
     font-family: 'Segoe UI';
     font-weight: bold;
     color: #222020;
+}
+
+#date_photo {
+    margin-top: 0px;
+    justify-self: center;
+    grid-column: 1 / -1;
 }
 
 @media (orientation: portrait) {

@@ -20,6 +20,7 @@ function onLoad()
     //generateField(25);
     fetchGridPlante();
     attachCameraEvent();
+    fetchPhoto();
 }
 
 // Mets à jour les valeurs des labels associés aux sliders
@@ -103,15 +104,23 @@ function attachPlanteActionEvent()
 function attachCameraEvent()
 {
     const cameraButton = document.getElementById("camera");
-    cameraButton.addEventListener("click", async (event) => {
-        let response = await api.getCameraImage();
-        if(response.ok)
-        {
-            const blob = await response.blob();
-            const imageUrl = URL.createObjectURL(blob);
-            document.querySelector("field-parts").style.backgroundImage = `url(${imageUrl})`;
-        }
-    });
+    cameraButton.addEventListener("click", fetchPhoto);
+}
+
+async function fetchPhoto()
+{
+    document.getElementById("camera").classList.add("spinning");
+    let response = await api.getCameraImage();
+    
+    if(response.ok)
+    {
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        document.querySelector("field-parts").style.backgroundImage = `url(${imageUrl})`;
+        document.getElementById("date_photo").textContent = `${new Date().toLocaleString()}`;
+    }
+        document.getElementById("camera").classList.remove("spinning");
+
 }
 
 function attachLegumeDropdownEvent()
