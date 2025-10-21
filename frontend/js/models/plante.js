@@ -10,7 +10,7 @@ export class Plante {
     get quantiteEau() { return this.#quantiteEau; }
     get id() { return this.#id; }
 
-    constructor(nom, frequenceArrosage, quantiteEau, id = null) {
+    constructor(nom, frequenceArrosage, quantiteEau, id = 0, lastArrosage = 0) {
         this.#nom = nom;
         this.#frequenceArrosage = frequenceArrosage;
         this.#quantiteEau = quantiteEau;

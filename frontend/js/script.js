@@ -2,7 +2,7 @@ import { Plante } from "./models/plante.js";
 import { ApiService } from "./api-service.js";
 
 const rsc = '../rsc'
-const api = new ApiService("http://localhost:8080");
+const api = new ApiService("http://192.168.1.110:1880");
 
 let selectedTile = null;
 
@@ -19,6 +19,7 @@ function onLoad()
     attachGridSizeEvent();
     //generateField(25);
     fetchGridPlante();
+    attachCameraEvent();
 }
 
 // Mets à jour les valeurs des labels associés aux sliders
@@ -64,7 +65,7 @@ function attachPlanteActionEvent()
     const saveButton = document.getElementById("sauvegarder_plante");
     const deleteButton = document.getElementById("supprimer_plante");
 
-    saveButton.addEventListener("click", (event) => 
+    saveButton.addEventListener("click", async (event) => 
     {
         if(!selectedTile) return;
        
@@ -77,8 +78,8 @@ function attachPlanteActionEvent()
             selectedTile.dataset.id
             );
 
-        const rep = api.sendPlante(plante);
-        if(rep.response?.status != 200)
+        let rep = await api.sendPlante(plante.toData());
+        if(!rep.ok)
         {
             alert("Erreur lors de l'enregistrement de la plante");
             return;
@@ -96,6 +97,20 @@ function attachPlanteActionEvent()
         delete selectedTile.dataset.plante;
         api.deletePlante(selectedTile.dataset.id);
         updatePlanteUI(new Plante("", 0, 0));
+    });
+}
+
+function attachCameraEvent()
+{
+    const cameraButton = document.getElementById("camera");
+    cameraButton.addEventListener("click", async (event) => {
+        let response = await api.getCameraImage();
+        if(response.ok)
+        {
+            const blob = await response.blob();
+            const imageUrl = URL.createObjectURL(blob);
+            document.querySelector("field-parts").style.backgroundImage = `url(${imageUrl})`;
+        }
     });
 }
 

@@ -1,5 +1,3 @@
-import { Plante } from "./models/plante.js";
-
 export class ApiService
 {
     constructor(baseUrl)
@@ -10,8 +8,9 @@ export class ApiService
     async sendPlante(plant)
     {
         const payload = JSON.stringify(plant);
-        return await fetch(this.baseURL + "/plants", 
+        let rep = await fetch(this.baseURL + "/plants", 
             {method: "post", headers: {"Content-Type": "application/json"}, body: payload});
+        return rep;
     }
 
     async deletePlante(plantId)
@@ -23,12 +22,13 @@ export class ApiService
 
     async getPlantes()
     {
-        const result = null;
+        let result = null;
         try
         {
-            const result =  await fetch(this.baseURL + "/plants", {method: "get"});
+            result =  await fetch(this.baseURL + "/plants", {method: "get"});
         }catch(e)
         {
+            console.log(e)
         }
 
         if(result?.status == 200)
@@ -36,11 +36,7 @@ export class ApiService
             return await result.json();
         } else {
             // Pour phase de test, a retirer en suivant
-            const plantes = [];
-            for(let i=0; i<25; i++) {
-                plantes.push(new Plante("radis", 5, 500, i).toData());
-            }         
-            return {data: plantes};
+            return [];
         }
     }
 
@@ -53,6 +49,6 @@ export class ApiService
 
     async getCameraImage()
     {
-        return await fetch(this.baseURL + "/camera/image", {method: "get"});
+        return await fetch(this.baseURL + "/camera", {method: "get"});
     }
 }

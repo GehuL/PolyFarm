@@ -69,8 +69,7 @@ field-parts {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     background-image: url('../rsc/bac_culture.png');
-    background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     width: 80%;
     aspect-ratio: 1 / 1;
 }
