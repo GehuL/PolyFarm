@@ -193,8 +193,10 @@ footer {
 
 #date_photo {
     margin-top: 0px;
+    align-self: self-start;
     justify-self: center;
     grid-column: 1 / -1;
+    font-weight: bolder;
 }
 
 @media (orientation: portrait) {
