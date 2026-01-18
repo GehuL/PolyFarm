@@ -166,16 +166,5 @@ Actuellement :
 
     - Moteur bouges OK 
     - Détection fin de courses OK 
-    - Déplacement x,y en cours 
+    - Déplacement x,y OK
     - Interpréter UART en cours 
-
-
-Variables : 
-    - distance max count (step) 
-    - fin de courses 
-    - distances actuels (step)
-
-
-Fonction initialisation : 
-
-    - 
