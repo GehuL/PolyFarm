@@ -15,9 +15,9 @@ export class ApiService
 
     async deletePlante(plantId)
     {
-        const payload = JSON.stringify(plantId);
-        return await fetch(this.baseURL + "/plants" + plantId, 
-            {method: "delete", headers: {"Content-Type": "application/json"}, body});
+        // DELETE doesn't need a JSON body for an id; call the REST URL /plants/:id
+        return await fetch(this.baseURL + "/plants/" + encodeURIComponent(plantId),
+            { method: "DELETE" });
     }
 
     async getPlantes()
@@ -25,18 +25,20 @@ export class ApiService
         let result = null;
         try
         {
-            result =  await fetch(this.baseURL + "/plants", {method: "get"});
+            result =  await fetch(this.baseURL + "/plants", { method: "GET" });
         }catch(e)
         {
             console.log(e)
         }
 
-        if(result?.status == 200)
+        if(result?.ok)
         {
-            return await result.json();
+            const json = await result.json();
+            if(Array.isArray(json)) return { data: json };
+            if(json && (Array.isArray(json.data) || json.data !== undefined)) return json;
+            return { data: [] };
         } else {
-            // Pour phase de test, a retirer en suivant
-            return [];
+            return { data: [] };
         }
     }
 
