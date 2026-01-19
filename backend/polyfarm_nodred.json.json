@@ -1,0 +1,642 @@
+[
+    {
+        "id": "07db99cc871258a7",
+        "type": "tab",
+        "label": "Flux 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "492128feb567c8b6",
+        "type": "http in",
+        "z": "07db99cc871258a7",
+        "name": "PLANTS [GET]",
+        "url": "/plants",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 240,
+        "y": 160,
+        "wires": [
+            [
+                "c0cdf9e58b541426"
+            ]
+        ]
+    },
+    {
+        "id": "bf6d24c2c9523147",
+        "type": "http response",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 960,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "4c2cd1d127a991d0",
+        "type": "http in",
+        "z": "07db99cc871258a7",
+        "name": "PLANTS [POST]",
+        "url": "/plants",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": true,
+        "swaggerDoc": "",
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "dc8f923eb279321a",
+                "3a0645dc44e1e66a"
+            ]
+        ]
+    },
+    {
+        "id": "dc8f923eb279321a",
+        "type": "function",
+        "z": "07db99cc871258a7",
+        "name": "send X",
+        "func": "let plante = JSON.parse(msg.req.body);\nconsole.log(plante);\nmsg.payload = plante.x;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 220,
+        "wires": [
+            [
+                "bfebb2a956f14f10",
+                "1d29e18108642b84"
+            ]
+        ]
+    },
+    {
+        "id": "bfebb2a956f14f10",
+        "type": "http response",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 840,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "955f694d79916fef",
+        "type": "http in",
+        "z": "07db99cc871258a7",
+        "name": "CAMERA [GET]",
+        "url": "/camera",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 420,
+        "wires": [
+            [
+                "b7fbeaa06954debb",
+                "00653cd36588221c"
+            ]
+        ]
+    },
+    {
+        "id": "b7fbeaa06954debb",
+        "type": "exec",
+        "z": "07db99cc871258a7",
+        "command": "python3 /home/polyfarm/take_picture.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 500,
+        "y": 380,
+        "wires": [
+            [],
+            [],
+            [
+                "3ef3f063f77de04e"
+            ]
+        ]
+    },
+    {
+        "id": "3ef3f063f77de04e",
+        "type": "file in",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "filename": "/home/polyfarm/picture.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "base64",
+        "allProps": false,
+        "x": 820,
+        "y": 420,
+        "wires": [
+            [
+                "9806902a2b11333c",
+                "6dcf116c0c2be55c"
+            ]
+        ]
+    },
+    {
+        "id": "6dcf116c0c2be55c",
+        "type": "http response",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "image/png"
+        },
+        "x": 1220,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "9806902a2b11333c",
+        "type": "debug",
+        "z": "07db99cc871258a7",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "00653cd36588221c",
+        "type": "debug",
+        "z": "07db99cc871258a7",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "78c9aa08cdff45b3",
+        "type": "inject",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 230,
+        "y": 500,
+        "wires": [
+            [
+                "b7fbeaa06954debb"
+            ]
+        ]
+    },
+    {
+        "id": "c95ab45df1570237",
+        "type": "mqtt out",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "topic": "capteurs/hum1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "{\"test\":\"bonjour\"}",
+        "contentType": "application/json",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fef3235945981ea6",
+        "x": 660,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "373843ad533d7441",
+        "type": "inject",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "capteurs/hum1",
+        "payload": "65",
+        "payloadType": "str",
+        "x": 170,
+        "y": 740,
+        "wires": [
+            [
+                "c95ab45df1570237"
+            ]
+        ]
+    },
+    {
+        "id": "dd7728218d454457",
+        "type": "rpi-dht22",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "topic": "rpi-dht22",
+        "dht": "11",
+        "pintype": "0",
+        "pin": "2",
+        "x": 280,
+        "y": 820,
+        "wires": [
+            [
+                "ed69e23c24387929",
+                "b5de8ae9f009662b"
+            ]
+        ]
+    },
+    {
+        "id": "b5de8ae9f009662b",
+        "type": "mqtt out",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "topic": "capteurs/temp1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "{\"test\":\"bonjour\"}",
+        "contentType": "application/json",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fef3235945981ea6",
+        "x": 660,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "5901b274df59b1da",
+        "type": "inject",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "capteurs/temp1",
+        "payload": "25",
+        "payloadType": "str",
+        "x": 340,
+        "y": 880,
+        "wires": [
+            [
+                "b5de8ae9f009662b"
+            ]
+        ]
+    },
+    {
+        "id": "cab2869049d08e5e",
+        "type": "inject",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "capteurs/lum1",
+        "payload": "113",
+        "payloadType": "str",
+        "x": 170,
+        "y": 680,
+        "wires": [
+            [
+                "65c8509beff67bb3"
+            ]
+        ]
+    },
+    {
+        "id": "65c8509beff67bb3",
+        "type": "mqtt out",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "topic": "capteurs/lum1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "{\"test\":\"bonjour\"}",
+        "contentType": "application/json",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fef3235945981ea6",
+        "x": 460,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "11ad9aaff070671b",
+        "type": "inject",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "props": [],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 120,
+        "y": 820,
+        "wires": [
+            [
+                "dd7728218d454457"
+            ]
+        ]
+    },
+    {
+        "id": "ed69e23c24387929",
+        "type": "function",
+        "z": "07db99cc871258a7",
+        "name": "read humidity",
+        "func": "msg.payload = msg.humidity;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 820,
+        "wires": [
+            [
+                "c95ab45df1570237"
+            ]
+        ]
+    },
+    {
+        "id": "5f5f86710cea825b",
+        "type": "function",
+        "z": "07db99cc871258a7",
+        "name": "function 2",
+        "func": "let plants = []\nfor(let y = 0; y < 5; y++)\n{\n    for(let x = 0; x < 5; x++)\n{\n    plants.push({nom: \"radis\", frequenceArrosage: 3,\n     quantiteEau: 500, lastArrosage: null, \n     x: x/5*100, y:y/5*100})\n}\n}\n\nmsg.payload = plants;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 40,
+        "wires": [
+            [
+                "aaf0b829894371b7"
+            ]
+        ]
+    },
+    {
+        "id": "aaf0b829894371b7",
+        "type": "file",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "filename": "Documents/polyfarm/backend/plants.json",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 820,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "086af475577ea2d6",
+        "type": "inject",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 40,
+        "wires": [
+            [
+                "5f5f86710cea825b"
+            ]
+        ]
+    },
+    {
+        "id": "c0cdf9e58b541426",
+        "type": "file in",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "filename": "Documents/polyfarm/backend/plants.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 520,
+        "y": 160,
+        "wires": [
+            [
+                "18228fd48260294c"
+            ]
+        ]
+    },
+    {
+        "id": "18228fd48260294c",
+        "type": "json",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": true,
+        "x": 710,
+        "y": 160,
+        "wires": [
+            [
+                "bf6d24c2c9523147"
+            ]
+        ]
+    },
+    {
+        "id": "1d29e18108642b84",
+        "type": "serial out",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "serial": "bbf05772aedc134c",
+        "x": 860,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3a0645dc44e1e66a",
+        "type": "function",
+        "z": "07db99cc871258a7",
+        "name": "send Y",
+        "func": "let plante = JSON.parse(msg.req.body);\nconsole.log(plante);\nmsg.payload = plante.y;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 260,
+        "wires": [
+            [
+                "6cc61a4055d2e2d1"
+            ]
+        ]
+    },
+    {
+        "id": "6cc61a4055d2e2d1",
+        "type": "serial out",
+        "z": "07db99cc871258a7",
+        "name": "",
+        "serial": "e4a72345d25fddd4",
+        "x": 860,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "fef3235945981ea6",
+        "type": "mqtt-broker",
+        "name": "mqtt",
+        "broker": "192.168.1.125",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "bbf05772aedc134c",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "57600",
+        "databits": 8,
+        "parity": "none",
+        "stopbits": 1,
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": 10000
+    },
+    {
+        "id": "e4a72345d25fddd4",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/ttyACM1",
+        "serialbaud": "9600",
+        "databits": 8,
+        "parity": "none",
+        "stopbits": 1,
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": 10000
+    },
+    {
+        "id": "405efdcc0867c5bd",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-dht-sensor": "1.0.4",
+            "node-red-node-serialport": "2.0.3"
+        }
+    }
+]
